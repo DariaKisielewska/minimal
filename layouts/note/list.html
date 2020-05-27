@@ -1,0 +1,42 @@
+{{ partial "header" . }}
+
+
+<style>
+ul {
+  text-align: left;
+  list-style: inside;
+}
+
+
+article {
+  -webkit-columns: 2 300px;
+     -moz-columns: 2 300px;
+          columns: 2 300px;
+}
+
+</style>
+
+
+<main>
+
+    <h2>{{ .Title }}</h2>
+    <div>{{ .Content }}</div>
+
+    <article>
+    <!-- Groups content according to the "param_key" field in front matter -->
+    {{ range .Pages.GroupByParam "tech" }}
+    <h3>{{ .Key }}</h3>
+    <ul >
+        {{ range .Pages }}
+        <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </li>
+        {{ end }}
+    </ul>
+    {{ end }}
+    </article>
+
+</main>
+
+{{ partial "paginator" . }}
+{{ partial "footer" . }}
